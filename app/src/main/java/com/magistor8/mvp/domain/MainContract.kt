@@ -5,13 +5,13 @@ import com.magistor8.mvp.domain.entities.DataModel
 interface MainContract {
 
     sealed interface ViewState {
-        object EmptyState: ViewState
+        data class Loading(val progress: Int): ViewState
         data class SearchComplete(val data: List<DataModel>) : ViewState
         data class Error(val error: Throwable): ViewState
     }
 
-    sealed interface Event {
-        class getData(word: String, isOnline: Boolean): Event
+    sealed interface Events {
+        data class GetData(val word: String): Events
     }
 
     interface View {
@@ -21,6 +21,6 @@ interface MainContract {
     interface Presenter {
         fun attachView(view: View)
         fun detachView(view: View)
-        fun onEvent(event: Event)
+        fun onEvent(event: Events)
     }
 }
