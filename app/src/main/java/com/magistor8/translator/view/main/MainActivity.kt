@@ -1,25 +1,23 @@
-package com.magistor8.mvp.view
+package com.magistor8.translator.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.magistor8.mvp.R
-import com.magistor8.mvp.data.MainPresenter
-import com.magistor8.mvp.databinding.ActivityMainBinding
-import com.magistor8.mvp.domain.MainContract
-import com.magistor8.mvp.domain.entities.DataModel
+import com.magistor8.translator.R
+import com.magistor8.translator.databinding.ActivityMainBinding
+import com.magistor8.translator.domain.MainContract
+import com.magistor8.translator.domain.entities.DataModel
+import com.magistor8.translator.view.search_dialog_fragment.SearchDialogFragment
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
-    private val presenter by lazy {
-        MainPresenter()
-    }
     private val adapter = MainAdapter(
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
@@ -29,6 +27,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         },
         listOf()
     )
+
+    //ViewModel
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,16 +43,19 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(object : SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    presenter.onEvent(MainContract.Events.GetData(searchWord))
+                    viewModel.onEvent(MainContract.Events.GetData(searchWord))
                 }
             })
             searchDialogFragment.show(supportFragmentManager,
                 BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
 
+        //ЛайвДата - рендер
+        viewModel.viewState.observe(this) { state -> renderData(state) }
+
     }
 
-    override fun renderData(viewState: MainContract.ViewState) {
+    private fun renderData(viewState: MainContract.ViewState) {
         when (viewState) {
             is MainContract.ViewState.SearchComplete -> {
                 val dataModel = viewState.data
@@ -81,7 +87,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            presenter.onEvent(MainContract.Events.GetData("hi"))
+            viewModel.onEvent(MainContract.Events.GetData("hi"))
         }
     }
 
@@ -99,16 +105,5 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         binding.successLinearLayout.visibility = GONE
         binding.loadingFrameLayout.visibility = GONE
         binding.errorLinearLayout.visibility = VISIBLE
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        presenter.attachView(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenter.detachView(this)
     }
 }

@@ -1,4 +1,4 @@
-package com.magistor8.mvp.view
+package com.magistor8.translator.view.search_dialog_fragment
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,7 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.magistor8.mvp.databinding.SearchDialogFragmentBinding
+import com.magistor8.translator.R
+import com.magistor8.translator.databinding.SearchDialogFragmentBinding
 
 class SearchDialogFragment : BottomSheetDialogFragment() {
 
@@ -61,7 +62,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
 
     private fun addOnClearClickListener() {
         binding.clearTextImageview.setOnClickListener {
-            binding.searchEditText.setText("")
+            binding.searchEditText.setText(getString(R.string.clearText))
             binding.searchButtonTextview.isEnabled = false
         }
     }

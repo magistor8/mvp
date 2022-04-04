@@ -1,6 +1,7 @@
-package com.magistor8.mvp.domain
+package com.magistor8.translator.domain
 
-import com.magistor8.mvp.domain.entities.DataModel
+import androidx.lifecycle.LiveData
+import com.magistor8.translator.domain.entities.DataModel
 
 interface MainContract {
 
@@ -14,13 +15,8 @@ interface MainContract {
         data class GetData(val word: String): Events
     }
 
-    interface View {
-        fun renderData(viewState: ViewState)
-    }
-
-    interface Presenter {
-        fun attachView(view: View)
-        fun detachView(view: View)
+    interface MyViewModelInterface {
+        val viewState: LiveData<ViewState>
         fun onEvent(event: Events)
     }
 }

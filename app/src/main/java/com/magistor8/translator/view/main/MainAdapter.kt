@@ -1,10 +1,10 @@
-package com.magistor8.mvp.view
+package com.magistor8.translator.view.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.magistor8.mvp.databinding.ActivityMainRecyclerviewItemBinding
-import com.magistor8.mvp.domain.entities.DataModel
+import com.magistor8.translator.databinding.ActivityMainRecyclerviewItemBinding
+import com.magistor8.translator.domain.entities.DataModel
 
 class MainAdapter(
     private val onItemClickListener: OnListItemClickListener,
