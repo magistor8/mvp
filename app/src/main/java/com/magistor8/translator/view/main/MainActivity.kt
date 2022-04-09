@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.magistor8.translator.R
 import com.magistor8.translator.databinding.ActivityMainBinding
 import com.magistor8.translator.domain.MainContract
 import com.magistor8.translator.domain.entities.DataModel
 import com.magistor8.translator.view.search_dialog_fragment.SearchDialogFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
@@ -28,10 +28,8 @@ class MainActivity : AppCompatActivity(){
         listOf()
     )
 
-    //ViewModel
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    // Lazy Inject ViewModel
+    val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
