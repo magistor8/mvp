@@ -1,6 +1,6 @@
-package com.magistor8.mvp.domain
+package com.magistor8.translator.domain
 
-import com.magistor8.mvp.domain.entities.DataModel
+import com.magistor8.translator.domain.entities.DataModel
 import io.reactivex.rxjava3.core.Observable
 
 interface Repo {

@@ -1,19 +1,21 @@
-package com.magistor8.mvp
+package com.magistor8.translator
 
 import android.app.Application
 import android.content.Context
-import com.magistor8.mvp.data.RepoImpl
-import com.magistor8.mvp.data.retrofit.RemoteDataSource
+import com.magistor8.translator.di.DaggerMyComponent
+import com.magistor8.translator.di.MyModule
 
 class App : Application() {
-
-    val repo by lazy {
-        RepoImpl(RemoteDataSource())
-    }
 
     companion object {
         lateinit var instance: App
             private set
+    }
+
+    val di by lazy {
+        DaggerMyComponent.builder()
+            .myModule(MyModule())
+            .build()
     }
 
     override fun onCreate() {

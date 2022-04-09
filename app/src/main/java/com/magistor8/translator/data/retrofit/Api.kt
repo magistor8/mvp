@@ -1,6 +1,6 @@
-package com.magistor8.mvp.data.retrofit
+package com.magistor8.translator.data.retrofit
 
-import com.magistor8.mvp.domain.entities.DataModel
+import com.magistor8.translator.domain.entities.DataModel
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
