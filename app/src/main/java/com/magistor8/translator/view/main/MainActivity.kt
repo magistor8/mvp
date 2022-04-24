@@ -55,6 +55,15 @@ class MainActivity : AppCompatActivity(){
 
     }
 
+    override fun onBackPressed() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.container);
+        if (fragment != null) {
+            supportFragmentManager.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun bottomNavigationViewSetup() {
         with(supportFragmentManager) {
             addOnBackStackChangedListener {

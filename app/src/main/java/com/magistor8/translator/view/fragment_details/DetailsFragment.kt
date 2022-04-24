@@ -58,16 +58,16 @@ class DetailsFragment : Fragment(){
                 for (meanings in it) {
                     val view = LayoutInflater.from(context).inflate(R.layout.meanings, null)
                     view.id = View.generateViewId()
-                    binding.root.addView(view)
-                    set.clone(binding.root)
+                    binding.constraint.addView(view)
+                    set.clone(binding.constraint)
                     if (num == 1) {
                         set.connect(view.id, ConstraintSet.TOP, R.id.search, ConstraintSet.BOTTOM)
                     } else {
                         set.connect(view.id, ConstraintSet.TOP, lastId, ConstraintSet.BOTTOM)
                     }
-                    set.connect(view.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
-                    set.connect(view.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
-                    set.applyTo(binding.root)
+                    set.connect(view.id, ConstraintSet.START, binding.constraint.id, ConstraintSet.START)
+                    set.connect(view.id, ConstraintSet.END, binding.constraint.id, ConstraintSet.END)
+                    set.applyTo(binding.constraint)
                     setValues(view, meanings)
                     lastId = view.id
                     num++
@@ -111,6 +111,8 @@ class DetailsFragment : Fragment(){
             start()
         }
     }
+
+
 
 
 }
