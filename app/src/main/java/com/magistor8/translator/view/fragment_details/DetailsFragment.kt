@@ -113,4 +113,6 @@ class DetailsFragment : Fragment(){
     }
 
 
+
+
 }

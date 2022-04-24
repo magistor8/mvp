@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.magistor8.translator.R
+import com.magistor8.translator.view.fragment_details.DetailsFragment
 import com.magistor8.translator.view.fragment_history.HistoryFragment
 import com.magistor8.translator.view.fragment_main.MainFragment
 
@@ -43,7 +44,7 @@ class Navigation(
         with(context.supportFragmentManager) {
             val tr = beginTransaction()
             if (findFragmentByTag(tag) != null && !forcedCreation) {
-                popBackStack(tag, 0)
+                popBackStack()
             } else {
                 when(action) {
                     Action.ADD -> {
@@ -62,11 +63,10 @@ class Navigation(
                     }
                 }
             }
-
-            if (addToBS && findFragmentByTag(tag) == null) {
+            if (addToBS) {
                 tr.addToBackStack(tag)
             }
-            tr.commitAllowingStateLoss()
+            tr.commit()
         }
     }
 
