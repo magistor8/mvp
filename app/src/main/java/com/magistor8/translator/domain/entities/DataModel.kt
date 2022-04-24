@@ -11,8 +11,10 @@ class DataModel(
     @SerializedName(TEXT) val text: String?,
     @SerializedName(MEANINGS) val meanings: List<Meanings>?
 )
+
 class Meanings(
     @SerializedName(TRANSLATION) val translation: Translation?,
     @SerializedName(IMAGE_URL) val imageUrl: String?
 )
+
 class Translation(@SerializedName(TEXT) val translation: String?)
