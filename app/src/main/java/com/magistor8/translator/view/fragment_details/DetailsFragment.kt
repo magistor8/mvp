@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment
 import coil.load
 import com.magistor8.translator.R
 import com.magistor8.translator.databinding.FragmentDetailsBinding
-import com.magistor8.translator.domain.entities.DataModel
-import com.magistor8.translator.domain.entities.Meanings
+import com.magistor8.core.domain.entities.DataModel
+import com.magistor8.core.domain.entities.Meanings
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
@@ -83,15 +83,15 @@ class DetailsFragment : Fragment(){
             view.findViewById<AppCompatImageView>(R.id.image).load(normalizeUrl)
         }
         //Translation
-        if (meanings.translation !== null && meanings.translation.translation !== null) {
-            view.findViewById<TextView>(R.id.translation).text = meanings.translation.translation
+        if (meanings.translation !== null && meanings.translation!!.translation !== null) {
+            view.findViewById<TextView>(R.id.translation).text = meanings.translation!!.translation
         } else {
             view.findViewById<TextView>(R.id.translation).text = R.string.clearText.toString()
         }
         //Audio
         if (meanings.soundUrl !== null) {
             view.findViewById<AppCompatButton>(R.id.play).setOnClickListener {
-                playAudio(meanings.soundUrl)
+                playAudio(meanings.soundUrl!!)
             }
         } else {
             view.findViewById<AppCompatButton>(R.id.play).visibility = GONE

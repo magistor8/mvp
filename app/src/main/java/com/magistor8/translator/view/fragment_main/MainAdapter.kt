@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.translator.databinding.ActivityMainRecyclerviewItemBinding
-import com.magistor8.translator.domain.entities.DataModel
+import com.magistor8.core.domain.entities.DataModel
 
 class MainAdapter(
     private val onItemClickListener: OnListItemClickListener,

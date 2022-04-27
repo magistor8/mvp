@@ -3,11 +3,7 @@ package com.magistor8.translator.utils
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.magistor8.translator.R
-import com.magistor8.translator.view.fragment_details.DetailsFragment
-import com.magistor8.translator.view.fragment_history.HistoryFragment
-import com.magistor8.translator.view.fragment_main.MainFragment
 
 class Navigation(
     private val context: FragmentActivity,
@@ -44,7 +40,7 @@ class Navigation(
         with(context.supportFragmentManager) {
             val tr = beginTransaction()
             if (findFragmentByTag(tag) != null && !forcedCreation) {
-                popBackStack()
+                popBackStack(tag, 0)
             } else {
                 when(action) {
                     Action.ADD -> {
