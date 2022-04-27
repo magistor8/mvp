@@ -1,4 +1,4 @@
-package com.magistor8.translator.view.main
+package com.magistor8.translator.view.fragment_main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

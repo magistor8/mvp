@@ -8,4 +8,8 @@
     <string name="search_hint">New word</string>
     <string name="delete_description">X</string>
     <string name="clearText">""</string>
+    <string name="main">ПОИСК</string>
+    <string name="history">ИСТОРИЯ</string>
+    <string name="translate">перевод</string>
+    <string name="play">Play</string>
 </resources>

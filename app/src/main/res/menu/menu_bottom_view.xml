@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_main"
+        android:title="@string/main"
+        android:menuCategory="secondary"/>
+
+    <item
+        android:id="@+id/bottom_history"
+        android:title="@string/history"
+        android:menuCategory="secondary"/>
+
+</menu>
