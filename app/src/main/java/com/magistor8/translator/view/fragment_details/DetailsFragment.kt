@@ -17,15 +17,19 @@ import com.magistor8.translator.R
 import com.magistor8.translator.databinding.FragmentDetailsBinding
 import com.magistor8.core.domain.entities.DataModel
 import com.magistor8.core.domain.entities.Meanings
+import org.koin.android.scope.getOrCreateScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
 import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 
 
 private const val BUNDLE_DETAILS = "BUNDLE_DETAILS"
 
-class DetailsFragment : Fragment(){
+class DetailsFragment : Fragment(), KoinScopeComponent {
 
-    private val viewModel: DetailsFragmentViewModel by viewModel(named("DetailsFragment"))
+    override val scope: Scope by getOrCreateScope()
+    private val viewModel: DetailsFragmentViewModel by viewModel()
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
@@ -110,6 +114,11 @@ class DetailsFragment : Fragment(){
             prepare()
             start()
         }
+    }
+
+    override fun onDestroy() {
+        scope.close()
+        super.onDestroy()
     }
 
 

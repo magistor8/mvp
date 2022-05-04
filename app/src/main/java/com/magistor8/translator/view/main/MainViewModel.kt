@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.magistor8.translator.domain.MainContract
 import com.magistor8.core.domain.Repo
+import com.magistor8.translator.domain.BaseViewModel
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class MainViewModel : MainContract.ViewModelInterface, ViewModel(), KoinComponent {
+
+class MainViewModel : BaseViewModel(), MainContract.ViewModelInterface, KoinComponent {
 
     private val repository : Repo by inject()
 
@@ -24,10 +26,6 @@ class MainViewModel : MainContract.ViewModelInterface, ViewModel(), KoinComponen
         when(event) {
             is MainContract.Events.GetData -> loadData(event.word)
         }
-    }
-
-    private fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
-        return this as MutableLiveData<T>
     }
 
     private fun loadData(word: String) {

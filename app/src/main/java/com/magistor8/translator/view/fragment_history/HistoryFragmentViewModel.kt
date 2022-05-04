@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.magistor8.translator.domain.HistoryFragmentContract
 import com.magistor8.core.domain.Repo
+import com.magistor8.translator.domain.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class HistoryFragmentViewModel : ViewModel(), HistoryFragmentContract.ViewModelInterface, KoinComponent {
+class HistoryFragmentViewModel : BaseViewModel(), HistoryFragmentContract.ViewModelInterface, KoinComponent {
 
     private val repository : Repo by inject()
 
@@ -22,10 +23,6 @@ class HistoryFragmentViewModel : ViewModel(), HistoryFragmentContract.ViewModelI
     }
 
     override val viewState: LiveData<HistoryFragmentContract.ViewState> = MutableLiveData()
-
-    private fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
-        return this as MutableLiveData<T>
-    }
 
     override fun onEvent(event: HistoryFragmentContract.Events) {
         when(event) {

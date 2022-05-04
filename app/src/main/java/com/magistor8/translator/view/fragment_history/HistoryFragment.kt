@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.magistor8.core.room.HistoryEntity
 import com.magistor8.translator.databinding.FragmentHistoryBinding
 import com.magistor8.translator.domain.HistoryFragmentContract
+import org.koin.android.scope.getOrCreateScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
 import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 
 
-class HistoryFragment : Fragment(){
+class HistoryFragment : Fragment(), KoinScopeComponent {
 
-    private val viewModel: HistoryFragmentViewModel by viewModel(named("HistoryFragment"))
+    override val scope: Scope by getOrCreateScope()
+    private val viewModel: HistoryFragmentViewModel by viewModel()
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
@@ -56,6 +60,10 @@ class HistoryFragment : Fragment(){
         }
     }
 
+    override fun onDestroy() {
+        scope.close()
+        super.onDestroy()
+    }
 
 
 }
