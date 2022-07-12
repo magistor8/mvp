@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import com.magistor8.translator.R
-import com.magistor8.translator.data.room.HistoryDao
 import com.magistor8.translator.databinding.ActivityMainBinding
 import com.magistor8.translator.domain.MainContract
 import com.magistor8.translator.utils.Navigation
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity(){
     private var lastRequest = SS
 
     private val navigation : Navigation by inject { parametersOf(this)}
-    private val historyDao : HistoryDao by inject()
     private val viewModel: MainViewModel by viewModel(named("Main"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.container);
+        val fragment = supportFragmentManager.findFragmentById(R.id.container)
         if (fragment != null) {
             supportFragmentManager.popBackStack()
         } else {

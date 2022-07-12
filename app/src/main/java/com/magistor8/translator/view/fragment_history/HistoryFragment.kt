@@ -4,19 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.magistor8.translator.R
-import com.magistor8.translator.data.room.HistoryEntity
+import com.magistor8.core.room.HistoryEntity
 import com.magistor8.translator.databinding.FragmentHistoryBinding
 import com.magistor8.translator.domain.HistoryFragmentContract
-import com.magistor8.translator.utils.Navigation
-import com.magistor8.translator.view.fragment_main.MainFragment
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
 

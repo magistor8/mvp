@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.magistor8.translator.databinding.FragmentMainBinding
 import com.magistor8.translator.domain.MainFragmentContract
-import com.magistor8.translator.domain.entities.DataModel
+import com.magistor8.core.domain.entities.DataModel
 import com.magistor8.translator.utils.Navigation
 import com.magistor8.translator.view.fragment_details.DetailsFragment
 import org.koin.android.ext.android.inject

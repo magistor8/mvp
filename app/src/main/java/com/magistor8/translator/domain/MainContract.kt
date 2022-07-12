@@ -1,7 +1,7 @@
 package com.magistor8.translator.domain
 
 import androidx.lifecycle.LiveData
-import com.magistor8.translator.domain.entities.DataModel
+import com.magistor8.core.domain.entities.DataModel
 
 interface MainContract {
 

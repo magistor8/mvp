@@ -3,7 +3,7 @@ package com.magistor8.translator.view.fragment_history
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.magistor8.translator.data.room.HistoryEntity
+import com.magistor8.core.room.HistoryEntity
 import com.magistor8.translator.databinding.HistoryFragmentRecyclerviewItemBinding
 
 class HistoryAdapter(
