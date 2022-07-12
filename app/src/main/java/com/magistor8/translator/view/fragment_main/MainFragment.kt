@@ -6,26 +6,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.magistor8.translator.databinding.FragmentMainBinding
 import com.magistor8.translator.domain.MainFragmentContract
 import com.magistor8.core.domain.entities.DataModel
+import com.magistor8.translator.R
 import com.magistor8.translator.utils.Navigation
+import com.magistor8.translator.utils.viewById
 import com.magistor8.translator.view.fragment_details.DetailsFragment
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.getOrCreateScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 
 private const val BUNDLE = "BUNDLE"
 private const val BUNDLE_DETAILS = "BUNDLE_DETAILS"
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), KoinScopeComponent {
 
-    private val viewModel: MainFragmentViewModel by viewModel(named("MainFragment"))
+    override val scope: Scope by getOrCreateScope()
+    private val viewModel: MainFragmentViewModel by viewModel()
     private val navigation : Navigation by inject { parametersOf(this) }
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+
+    //Использование делегата
+    private val mainActivityRecyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
 
     private val adapter = MainAdapter(
         object : MainAdapter.OnListItemClickListener {
@@ -54,8 +64,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.mainActivityRecyclerview.layoutManager = LinearLayoutManager(context)
-        binding.mainActivityRecyclerview.adapter = adapter
+        mainActivityRecyclerview.layoutManager = LinearLayoutManager(context)
+        mainActivityRecyclerview.adapter = adapter
         arguments?.let {
             loadData(it)
         }
@@ -68,11 +78,21 @@ class MainFragment : Fragment() {
 
     }
 
+    fun newData(data : List<DataModel>) {
+        adapter.setData(data)
+    }
+
     private fun loadData(bundle: Bundle) {
         val data = bundle.getParcelableArrayList<DataModel>(BUNDLE)?.toList()
         data?.let {
             adapter.setData(data)
+            bundle.clear()
         }
+    }
+
+    override fun onDestroy() {
+        scope.close()
+        super.onDestroy()
     }
 
 }

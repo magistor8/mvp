@@ -8,23 +8,31 @@ import com.magistor8.core.domain.entities.DataModel
 
 class MainAdapter(
     private val onItemClickListener: OnListItemClickListener,
-    private var data: List<DataModel>
+    private val data: List<DataModel>
 ) : RecyclerView.Adapter<MainAdapter.RecyclerItemViewHolder>() {
 
+    //Пример теневого поля
+    private var dataList = data
+        set(value) {
+            if (value == field) return
+            field = value
+            notifyDataSetChanged()
+        }
+
+
     fun setData(newData: List<DataModel>) {
-        this.data = newData
-        notifyDataSetChanged()
+        this.dataList = newData
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder =
         RecyclerItemViewHolder(ActivityMainRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(dataList[position])
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return dataList.size
     }
 
     inner class RecyclerItemViewHolder(private val binding: ActivityMainRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {

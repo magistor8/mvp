@@ -13,6 +13,12 @@ class Navigation(
         ADD, REPLACE
     }
 
+    fun <T : Fragment> check(fragmentClass: Class<T>): Fragment? {
+        with(context.supportFragmentManager) {
+            return findFragmentByTag(fragmentClass.name)
+        }
+    }
+
     fun <T : Fragment> navigate(
         fragmentClass: Class<T>,
         action: Action,
